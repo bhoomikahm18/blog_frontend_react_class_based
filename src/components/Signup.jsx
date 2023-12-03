@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Header from './Header';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export class Signup extends Component {
   constructor(props) {
@@ -10,10 +12,12 @@ export class Signup extends Component {
         email: "",
         password: ""
       }
-
     }
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.sendRequest = this.sendRequest.bind(this);
+
   }
 
   handleChange(e) {
@@ -25,15 +29,31 @@ export class Signup extends Component {
     }))
   }
 
-  handleSubmit(e) {
+  async sendRequest() {
+    const res = await axios.post(`http://localhost:5000/api/user/signup`, {
+      name: this.state.inputs.name,
+      email: this.state.inputs.email,
+      password: this.state.inputs.password,
+    }).catch(err => console.log(err))
+
+    let data = null;
+    if (res) {
+      data = await res.data;
+    }
+    return data;
+  }
+
+  async handleSubmit(e) {
     e.preventDefault()
     console.log(this.state.inputs);
+    const result = await this.sendRequest();
+    this.props.navigation.navigate('/auth')
   }
 
   render() {
     return (
       <>
-        <Header banner="/assets/img/about-bg.jpg" heading="Signup Page" subHeading="Register a new User" />
+        <Header banner="assets/img/about-bg.jpg" heading="Signup Page" subHeading="Register a new User" />
 
         <main className="mb-4">
           <div className="container px-4 px-lg-5">
@@ -59,7 +79,7 @@ export class Signup extends Component {
                     </div><br />
                     {/* Submit Button*/}
                     <div style={{ textAlign: 'center' }}>
-                      <button className="btn text-uppercase" id="submitButton" type="submit" style={{ color: 'orange' }}>Sign Up</button><br />
+                      <Link to='/blogs'><button className="btn text-uppercase" id="submitButton" type="submit" style={{ color: 'orange' }}>Sign Up</button></Link>
                     </div>
 
                     <span style={{ 'color': '#dc3545', 'fontWeight': 'bold', 'fontStyle': 'oblique' }}>

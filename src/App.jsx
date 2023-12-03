@@ -8,10 +8,16 @@ import Logout from './components/Logout'
 import Signup from './components/Signup'
 
 export class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      isLoggedIn: false,
+    }
+  }
   render() {
     return (
       <>
-        <Navbar />
+        <Navbar isLoggedIn={this.state.isLoggedIn}/>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/auth' element={<Login />}></Route>

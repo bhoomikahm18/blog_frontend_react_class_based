@@ -1,6 +1,6 @@
-//import axios from 'axios';
+import axios from 'axios';
 import React, { Component } from 'react'
-import Header from './Header';
+import { Link } from 'react-router-dom';
 
 export class Login extends Component {
   constructor(props) {
@@ -13,6 +13,7 @@ export class Login extends Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.sendRequest = this.sendRequest.bind(this);
   }
 
   handleChange(e) {
@@ -24,14 +25,51 @@ export class Login extends Component {
     }))
   }
 
+  async sendRequest() {
+    const res = await axios.post(`http://localhost:5000/api/user/login`, {
+      name: this.state.inputs.name,
+      email: this.state.inputs.email,
+      password: this.state.inputs.password,
+    }).catch(err => {
+      if (err.response.request.status === 404) {
+        alert("User does not exist");
+        this.setState(false);
+      } else if (err.response.request.status === 400) {
+        alert("Invalid password");
+        this.setState(false);
+      }
+    })
+
+    let data = null;
+    if (res) {
+      data = await res.data;
+    }
+    return data;
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     console.log(this.state.inputs);
+    this.sendRequest("login")
+      .then(data => localStorage.setState("userID", data.user._id))
+      .catch(err => console.log("There is mistake in Login"))
+
   }
   render() {
     return (
       < >
-        <Header banner="/assets/img/post-bg.jpg" heading="Login Page" subHeading="Login User to view blogs" />
+        <header className="masthead" style={{ "backgroundImage": "url('assets/img/post-bg.jpg')" }}>
+          <div className="container position-relative px-4 px-lg-5">
+            <div className="row gx-4 gx-lg-5 justify-content-center">
+              <div className="col-md-10 col-lg-8 col-xl-7">
+                <div className="page-heading">
+                  <h1>Login Page</h1>
+                  <span className="subheading">Login User to View Blogs</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
 
         <main className="mb-4">
           <div className="container px-4 px-lg-5">
@@ -53,7 +91,7 @@ export class Login extends Component {
                     </div><br />
                     {/* Submit Button*/}
                     <div style={{ textAlign: 'center' }}>
-                      <button className="btn text-uppercase" id="submitButton" type="submit" style={{ color: 'orange' }}>Submit</button>
+                      <Link to='/blogs'><button className="btn text-uppercase" id="submitButton" type="submit" style={{ color: 'orange' }}>Submit</button></Link>
                     </div>
 
                     <span style={{ 'color': '#dc3545', 'fontWeight': 'bold', 'fontStyle': 'oblique' }}>
