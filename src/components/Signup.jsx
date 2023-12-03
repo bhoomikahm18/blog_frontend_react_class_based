@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Header from './Header';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -43,17 +42,27 @@ export class Signup extends Component {
     return data;
   }
 
-  async handleSubmit(e) {
+  handleSubmit(e) {
     e.preventDefault()
     console.log(this.state.inputs);
-    const result = await this.sendRequest();
-    this.props.navigation.navigate('/auth')
+    this.sendRequest("signup");
   }
 
   render() {
     return (
       <>
-        <Header banner="assets/img/about-bg.jpg" heading="Signup Page" subHeading="Register a new User" />
+       <header className="masthead" style={{ "backgroundImage": "url('assets/img/about-bg.jpg')" }}>
+          <div className="container position-relative px-4 px-lg-5">
+            <div className="row gx-4 gx-lg-5 justify-content-center">
+              <div className="col-md-10 col-lg-8 col-xl-7">
+                <div className="page-heading">
+                  <h1>Sign up</h1>
+                  <span className="subheading">Register new user</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
 
         <main className="mb-4">
           <div className="container px-4 px-lg-5">

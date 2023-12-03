@@ -51,10 +51,14 @@ export class Login extends Component {
     e.preventDefault();
     console.log(this.state.inputs);
     this.sendRequest("login")
-      .then(data => localStorage.setState("userID", data.user._id))
+      .then(data => localStorage.setItem("userID", data.user._id))
       .catch(err => console.log("There is mistake in Login"))
-
   }
+
+  componentDidMount(){
+    const localData = localStorage.getItem("userID");
+  }
+  
   render() {
     return (
       < >

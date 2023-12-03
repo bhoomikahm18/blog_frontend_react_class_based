@@ -10,7 +10,6 @@ export class Logout extends Component {
   handleLogout() {
     this.props.isLoggedIn(false)
     localStorage.clear();
-
   }
   render() {
     return (
