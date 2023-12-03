@@ -1,23 +1,22 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 export class Navbar extends Component {
     render() {
         return (
             <>
-                <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
-                    <div class="container px-4 px-lg-5">
-                        <a class="navbar-brand" href="/">Blog App</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <nav className="navbar navbar-expand-lg navbar-light" id="mainNav">
+                    <div className="container px-4 px-lg-5">
+                        <Link to="/" className="navbar-brand" >Blog App</Link>
+                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                             Menu
-                            <i class="fas fa-bars"></i>
+                            <i className="fas fa-bars"></i>
                         </button>
-                        <div class="collapse navbar-collapse" id="navbarResponsive">
-                            <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/">Home</a></li>
-                                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="">MyBlogs</a></li>
-                                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="">Add Blogs</a></li>
-                                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="">Login</a></li>
-                                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="">Sign up</a></li>
+                        <div className="collapse navbar-collapse" id="navbarResponsive">
+                            <ul className="navbar-nav ms-auto py-4 py-lg-0">
+                                <li className="nav-item"><Link to='/auth' className="nav-link px-lg-3 py-3 py-lg-4">Login</Link></li>
+                                <li className="nav-item"><Link to="/auth/signup" className="nav-link px-lg-3 py-3 py-lg-4">Sign up</Link></li>
+                                <li className="nav-item"><Link to="/auth/logout" className="nav-link px-lg-3 py-3 py-lg-4">Logout</Link></li>
                             </ul>
                         </div>
                     </div>

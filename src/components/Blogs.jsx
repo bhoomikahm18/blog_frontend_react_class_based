@@ -8,5 +8,4 @@ export class Blogs extends Component {
   }
 }
 
-
 export default Blogs

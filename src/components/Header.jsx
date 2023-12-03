@@ -1,16 +1,23 @@
 import React, { Component } from 'react'
 
 export class Header extends Component {
+  constructor(props) {
+    super(props);
+
+  }
+
   render() {
+
+    let imageURL = `url(${this.props.banner})`;
     return (
       <>
-        <header class="masthead" style={{'background-image': "url('assets/img/contact-bg.jpg')"}}>
-          <div class="container position-relative px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-              <div class="col-md-10 col-lg-8 col-xl-7">
-                <div class="page-heading">
-                  <h1>Contact Me</h1>
-                  <span class="subheading">Have questions? I have answers.</span>
+        <header className="masthead" style={{ backgroundImage: { imageURL } }}>
+          <div className="container position-relative px-4 px-lg-5">
+            <div className="row gx-4 gx-lg-5 justify-content-center">
+              <div className="col-md-10 col-lg-8 col-xl-7">
+                <div className="page-heading">
+                  <h1>{this.props.heading}</h1>
+                  <span className="subheading">{this.props.subHeading}</span>
                 </div>
               </div>
             </div>
