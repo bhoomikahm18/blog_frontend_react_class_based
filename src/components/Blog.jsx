@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
 export class Blog extends Component {
-  // constructor(props){
-  //   super(props);
-  // }
   render() {
     return (
       <>
@@ -12,6 +9,7 @@ export class Blog extends Component {
           <Link to={`/blog/${this.props.id}`}>
             <h2 className="post-title">{this.props.title}</h2>
             <h3 className="post-subtitle">{this.props.description}</h3>
+            <h3 className="post-image">{this.props.imageURL}</h3>
           </Link>
 
           <p className="post-meta">
