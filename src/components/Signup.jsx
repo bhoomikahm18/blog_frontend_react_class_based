@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 export class Signup extends Component {
   constructor(props) {
@@ -38,6 +38,7 @@ export class Signup extends Component {
     let data = null;
     if (res) {
       data = await res.data;
+      console.log(data);
     }
     return data;
   }
@@ -45,7 +46,9 @@ export class Signup extends Component {
   handleSubmit(e) {
     e.preventDefault()
     console.log(this.state.inputs);
-    this.sendRequest("signup");
+    this.sendRequest()
+    .then(data => localStorage.setItem("userID", data.user._id))
+    .catch(err => console.log("There is mistake in Sign up"))
   }
 
   render() {
@@ -88,7 +91,7 @@ export class Signup extends Component {
                     </div><br />
                     {/* Submit Button*/}
                     <div style={{ textAlign: 'center' }}>
-                      <Link to='/blogs'><button className="btn text-uppercase" id="submitButton" type="submit" style={{ color: 'orange' }}>Sign Up</button></Link>
+                      <button className="btn text-uppercase" id="submitButton" type="submit" style={{ color: 'orange' }}>Sign Up</button>
                     </div>
 
                     <span style={{ 'color': '#dc3545', 'fontWeight': 'bold', 'fontStyle': 'oblique' }}>

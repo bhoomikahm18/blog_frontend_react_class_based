@@ -1,14 +1,14 @@
 import axios from 'axios';
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 export class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       inputs: {
-        email: "empty",
-        password: "empty"
+        email: "",
+        password: ""
       }
     }
     this.handleChange = this.handleChange.bind(this);
@@ -43,6 +43,7 @@ export class Login extends Component {
     let data = null;
     if (res) {
       data = await res.data;
+      console.log(data);
     }
     return data;
   }
@@ -50,7 +51,7 @@ export class Login extends Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log(this.state.inputs);
-    this.sendRequest("login")
+    this.sendRequest()
       .then(data => localStorage.setItem("userID", data.user._id))
       .catch(err => console.log("There is mistake in Login"))
   }
@@ -95,7 +96,7 @@ export class Login extends Component {
                     </div><br />
                     {/* Submit Button*/}
                     <div style={{ textAlign: 'center' }}>
-                      <Link to='/blogs'><button className="btn text-uppercase" id="submitButton" type="submit" style={{ color: 'orange' }}>Submit</button></Link>
+                      <button className="btn text-uppercase" id="submitButton" type="submit" style={{ color: 'orange' }}>Submit</button>
                     </div>
 
                     <span style={{ 'color': '#dc3545', 'fontWeight': 'bold', 'fontStyle': 'oblique' }}>
