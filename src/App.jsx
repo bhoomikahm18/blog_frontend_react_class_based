@@ -7,7 +7,7 @@ import Login from './components/Login'
 import Logout from './components/Logout'
 import Signup from './components/Signup'
 import AddBlogs from './components/AddBlogs'
-import Blogs from './components/Blogs'
+// import Blogs from './components/Blogs'
 import UserBlogs from './components/UserBlogs'
 import BlogDetail from './components/BlogDetail'
 
@@ -28,7 +28,7 @@ export class App extends Component {
           <Route path='/auth/logout' element={<Logout />} />
           <Route path='/auth/signup' element={<Signup />} />
 
-          <Route path='/blogs' element={<Blogs />} />
+          <Route path='/' element={<Home />} />
           <Route path='/blog/add' element={<AddBlogs />} />
           <Route path='/myBlogs' element={<UserBlogs />} />
           <Route path='/myBlogs/:id' element={<BlogDetail />} />

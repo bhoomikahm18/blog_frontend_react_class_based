@@ -27,7 +27,6 @@ export class Login extends Component {
 
   async sendRequest() {
     const res = await axios.post(`http://localhost:5000/api/user/login`, {
-      name: this.state.inputs.name,
       email: this.state.inputs.email,
       password: this.state.inputs.password,
     }).catch(err => {
@@ -54,10 +53,6 @@ export class Login extends Component {
     this.sendRequest()
       .then(data => localStorage.setItem("userID", data.user._id))
       .catch(err => console.log("There is mistake in Login"))
-  }
-
-  componentDidMount(){
-    const localData = localStorage.getItem("userID");
   }
   
   render() {

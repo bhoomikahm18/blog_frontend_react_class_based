@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import Blog from './Blog'
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 export class Blogs extends Component {
   constructor(props) {
@@ -17,16 +17,16 @@ export class Blogs extends Component {
       .catch(err => console.log(err))
 
     const data = await res.data;
-    console.log(data);
+    //console.log(data);
     return data;
   }
   async componentDidMount() {
-    await this.sendRequest()
-      .then(data => this.setState(data.blogs))
-
-    console.log(this.state.blogs);
+    this.sendRequest().then(data => this.setState(data));
+    //console.log(data.blogs);
+    //this.setState({ blogs: data.blogs });
   }
   render() {
+    console.log(this.state);
     return (
       <>
         <header className="masthead" style={{ "backgroundImage": "url('assets/img/about-bg.jpg')" }}>
@@ -42,17 +42,19 @@ export class Blogs extends Component {
           </div>
         </header>
 
-        <div className="container px-4 px-lg-5">
+        {
+          (this.state.blogs.length === 0) ? <h1>Loading..!!</h1> :
+          <div className="container px-4 px-lg-5">
           <div className="row gx-4 gx-lg-5 justify-content-center">
             <div className="col-md-10 col-lg-8 col-xl-7"
 
             >
-
-              <div className="d-flex justify-content-end mb-4"><Link className="btn btn-primary text-uppercase"
-                to="/">Older Posts →</Link></div>
             </div>
           </div>
         </div>
+        }
+        
+        
       </>
 
     )

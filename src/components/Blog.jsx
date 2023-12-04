@@ -2,33 +2,25 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
 export class Blog extends Component {
+  // constructor(props){
+  //   super(props);
+  // }
   render() {
     return (
       <>
-        <header className="masthead" style={{ "backgroundImage": "url('assets/img/about-bg.jpg')" }}>
-          <div className="container position-relative px-4 px-lg-5">
-            <div className="row gx-4 gx-lg-5 justify-content-center">
-              <div className="col-md-10 col-lg-8 col-xl-7">
-                <div className="page-heading">
-                  <h1>Blogs</h1>
-                  <span className="subheading">Display Blogs</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </header>
+        <div className="post-preview" >
+          <Link to={`/blog/${this.props.id}`}>
+            <h2 className="post-title">{this.props.title}</h2>
+            <h3 className="post-subtitle">{this.props.description}</h3>
+          </Link>
 
-        <main class="mb-4">
-          <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-              <div class="col-md-10 col-lg-8 col-xl-7">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nostrum ullam eveniet pariatur voluptates odit, fuga atque ea nobis sit soluta odio, adipisci quas excepturi maxime quae totam ducimus consectetur?</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius praesentium recusandae illo eaque architecto error, repellendus iusto reprehenderit, doloribus, minus sunt. Numquam at quae voluptatum in officia voluptas voluptatibus, minus!</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!</p>
-              </div>
-            </div>
-          </div>
-        </main>
+          <p className="post-meta">
+            Posted by <Link to={`/otherBlogs/${this.props.isUser}`}>{this.props.user}</Link>
+            &nbsp;
+          </p>
+        </div>
+        {/* Divider*/}
+        <hr className="my-4" />
       </>
     )
   }
