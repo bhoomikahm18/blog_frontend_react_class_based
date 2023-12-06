@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { Component } from 'react'
-import { unstable_HistoryRouter } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 
 export class Login extends Component {
@@ -43,16 +42,23 @@ export class Login extends Component {
     let data = null;
     if (res) {
       data = await res.data;
-      console.log(data);
+      // console.log(data);
     }
     return data;
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state.inputs);
-    this.sendRequest()
-      .then(data => localStorage.setItem("userID", data.user._id))
+    // console.log(this.state.inputs);
+    this.sendRequest("login")
+      .then(data => {
+        localStorage.setItem("userID", data.user._id)
+        console.log(data);
+      })
+      .then(data => {
+        this.props.setLoggedIn(true);
+        window.location.replace("/myBlogs")
+      })
       .catch(err => console.log("There is mistake in Login"))
   }
 

@@ -41,19 +41,32 @@ export class Home extends Component {
                         </div>
                     </div>
                 </header>
+                <div class="container px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            {
+                                (this.state.blogs.length !== 0) && this.state.blogs.map((blog, index) =>
 
-                {
-                    (this.state.blogs.length !== 0) && this.state.blogs.map((blog, index) =>
-                        <Blog
-                            id={blog._id}
-                            isUser={localStorage.getItem("userID") === blog.user._id}
-                            user={blog.user.name}
-                            title={blog.title}
-                            description={blog.description}
-                            imageURL={blog.image}
-                        />)
+                                    <div>
+                                        <div class="post-preview">
+                                            <a href="#">
+                                                <h2 class="post-title">{blog.title}</h2>
+                                                <h3 class="post-subtitle">{blog.description}</h3>
+                                            </a>
+                                            <p class="post-meta">
+                                                Posted by
+                                                <a href="#!"> { blog.user.name} </a>
+                                            </p>
+                                        </div>
 
-                }
+                                        <hr class="my-4" />
+                                    </div>
+                                )
+
+                            }
+                        </div>
+                    </div>
+                </div>
 
 
             </>

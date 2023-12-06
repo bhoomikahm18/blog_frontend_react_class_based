@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Blog from './Blog';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export class UserBlogs extends Component {
   constructor(props) {
@@ -36,7 +37,7 @@ export class UserBlogs extends Component {
   render() {
     return (
       <>
-        <header className="masthead" style={{ "backgroundImage": "url('assets/img/about-bg.jpg')" }}>
+        <header className="masthead" style={{ "backgroundImage": "url('assets/img/post-bg.jpg')" }}>
           <div className="container position-relative px-4 px-lg-5">
             <div className="row gx-4 gx-lg-5 justify-content-center">
               <div className="col-md-10 col-lg-8 col-xl-7">
@@ -48,18 +49,25 @@ export class UserBlogs extends Component {
             </div>
           </div>
         </header>
+        <div class="container px-4 px-lg-5">
+          <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
 
-        {this.state.user && this.state.user.blogs && this.state.user.blogs.map((blog, index) => (
-          <Blog
-            key={index}
-            isUser={true}
-            id={blog._id}
-            user={this.state.user.name}
-            description={blog.description}
-            title={blog.title}
-            image={blog.image}
-          />
-        ))}
+              {this.state.user && this.state.user.blogs && this.state.user.blogs.map((blog, index) => (
+                <div>
+                  <div class="post-preview">
+                    <Link to={`/myBlogs/${blog._id}`} blodID={blog._id}>
+                      <h2 class="post-title">{blog.title}</h2>
+                      <h3 class="post-subtitle">{blog.description}</h3>
+                    </Link >
+                  </div>
+
+                  <hr class="my-4" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div >
       </>
     )
   }

@@ -7,7 +7,6 @@ import Login from './components/Login'
 import Logout from './components/Logout'
 import Signup from './components/Signup'
 import AddBlogs from './components/AddBlogs'
-// import Blogs from './components/Blogs'
 import UserBlogs from './components/UserBlogs'
 import BlogDetail from './components/BlogDetail'
 
@@ -17,6 +16,11 @@ export class App extends Component {
     this.state = {
       isLoggedIn: false,
     }
+    this.setLoggedIn = this.setLoggedIn.bind(this);
+  }
+
+  setLoggedIn() {
+    this.setState()
   }
   render() {
     return (
@@ -24,9 +28,9 @@ export class App extends Component {
         <Navbar isLoggedIn={this.state.isLoggedIn} />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/auth' element={<Login />} />
-          <Route path='/auth/logout' element={<Logout />} />
-          <Route path='/auth/signup' element={<Signup />} />
+          <Route path='/auth' element={<Login setLoggedIn={this.setLoggedIn} />} />
+          <Route path='/auth/logout' element={<Logout setLoggedIn={this.setLoggedIn()} />} />
+          <Route path='/auth/signup' element={<Signup setLoggedIn={this.setLoggedIn()} />} />
 
           <Route path='/' element={<Home />} />
           <Route path='/blog/add' element={<AddBlogs isLoggedIn={this.state.isLoggedIn} />} />
