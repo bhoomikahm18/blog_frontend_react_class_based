@@ -15,12 +15,12 @@ export class Navbar extends Component {
                         <div className="collapse navbar-collapse" id="navbarResponsive">
                             <ul className="navbar-nav ms-auto py-4 py-lg-0">
                                 <li className="nav-item"><Link to='/' className="nav-link px-lg-3 py-3 py-lg-4">Home</Link></li>
-                                {(this.props.isLoggedIn === false) &&
+                                {(!this.props.isLoggedIn) &&
                                     <><li className="nav-item"><Link to='/myBlogs' className="nav-link px-lg-3 py-3 py-lg-4">My Blogs</Link></li>
                                         <li className="nav-item"><Link to='/blog/add' className="nav-link px-lg-3 py-3 py-lg-4">Add Blog</Link></li></>}
-                                {(this.props.isLoggedIn === false) && <><li className="nav-item"><Link to='/auth' className="nav-link px-lg-3 py-3 py-lg-4">Login</Link></li>
+                                {(!this.props.isLoggedIn) && <><li className="nav-item"><Link to='/auth' className="nav-link px-lg-3 py-3 py-lg-4">Login</Link></li>
                                     <li className="nav-item"><Link to="/auth/signup" className="nav-link px-lg-3 py-3 py-lg-4">Sign up</Link></li> </>}
-                                {(this.props.isLoggedIn === false) && <li className="nav-item"><Link to="/auth/logout" className="nav-link px-lg-3 py-3 py-lg-4"
+                                {(!this.props.isLoggedIn) && <li className="nav-item"><Link to="/auth/logout" className="nav-link px-lg-3 py-3 py-lg-4"
                                     onClick={() => {
                                         localStorage.clear();
                                         this.props.setState(false)

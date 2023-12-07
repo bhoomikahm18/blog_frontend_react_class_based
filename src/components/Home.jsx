@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react'
-import Blog from './Blog';
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 export class Home extends Component {
     constructor(props) {
@@ -26,7 +25,6 @@ export class Home extends Component {
         //this.setState({ blogs: data.blogs });
     }
     render() {
-        console.log(this.state);
         return (
             <>
                 <header className="masthead" style={{ "backgroundImage": "url('assets/img/about-bg.jpg')" }}>
@@ -41,25 +39,24 @@ export class Home extends Component {
                         </div>
                     </div>
                 </header>
-                <div class="container px-4 px-lg-5">
-                    <div class="row gx-4 gx-lg-5 justify-content-center">
-                        <div class="col-md-10 col-lg-8 col-xl-7">
+                <div className="container px-4 px-lg-5">
+                    <div className="row gx-4 gx-lg-5 justify-content-center">
+                        <div className="col-md-10 col-lg-8 col-xl-7">
                             {
                                 (this.state.blogs.length !== 0) && this.state.blogs.map((blog, index) =>
 
-                                    <div>
-                                        <div class="post-preview">
-                                            <a href="#">
-                                                <h2 class="post-title">{blog.title}</h2>
-                                                <h3 class="post-subtitle">{blog.description}</h3>
-                                            </a>
-                                            <p class="post-meta">
-                                                Posted by
-                                                <a href="#!"> { blog.user.name} </a>
+                                    <div key={index}>
+                                        <div className="post-preview">
+                                            <Link to={`/blog/${blog._id}`}>
+                                                <h2 className="post-title">{blog.title}</h2>
+                                                <h3 className="post-subtitle">{blog.description}</h3>
+                                            </Link>
+                                            <p className="post-meta">
+                                                Posted by {blog.user.name}
                                             </p>
                                         </div>
 
-                                        <hr class="my-4" />
+                                        <hr className="my-4" />
                                     </div>
                                 )
 

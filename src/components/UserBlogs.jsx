@@ -35,6 +35,7 @@ export class UserBlogs extends Component {
   }
 
   render() {
+
     return (
       <>
         <header className="masthead" style={{ "backgroundImage": "url('assets/img/post-bg.jpg')" }}>
@@ -49,20 +50,20 @@ export class UserBlogs extends Component {
             </div>
           </div>
         </header>
-        <div class="container px-4 px-lg-5">
-          <div class="row gx-4 gx-lg-5 justify-content-center">
-            <div class="col-md-10 col-lg-8 col-xl-7">
+        <div className="container px-4 px-lg-5">
+          <div className="row gx-4 gx-lg-5 justify-content-center">
+            <div className="col-md-10 col-lg-8 col-xl-7">
 
               {this.state.user && this.state.user.blogs && this.state.user.blogs.map((blog, index) => (
-                <div>
-                  <div class="post-preview">
-                    <Link to={`/myBlogs/${blog._id}`} blodID={blog._id}>
-                      <h2 class="post-title">{blog.title}</h2>
-                      <h3 class="post-subtitle">{blog.description}</h3>
+                <div key={index}>
+                  <div className="post-preview">
+                    <Link to={`/blog/${blog._id}`} >
+                      <h2 className="post-title">{blog.title}</h2>
+                      <h3 className="post-subtitle">{blog.description}</h3>
                     </Link >
                   </div>
 
-                  <hr class="my-4" />
+                  <hr className="my-4" />
                 </div>
               ))}
             </div>

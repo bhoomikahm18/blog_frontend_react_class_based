@@ -27,9 +27,8 @@ export class BlogDetail extends Component {
     }))
   }
 
-  async fetchDetails() {
-    console.log(this.props.blogID);
-    const res = await axios.get(`http://localhost:5000/api/blog/${this.props.blogID}`)
+  async fetchDetails(id) {
+    const res = await axios.get(`http://localhost:5000/api/blog/${id}`)
       .catch(err => console.log("Data not getting"))
 
     let data = null;
@@ -41,21 +40,24 @@ export class BlogDetail extends Component {
   }
 
   async componentDidMount() {
-    // const id = localStorage.getItem("userID");
-    this.fetchDetails()
+    const idArr = document.URL.split('/');
+    let id = idArr[idArr.length - 1];
+
+    this.fetchDetails(id)
       .then(data => this.setState({
         inputs: {
-          title: data.user.blogs.title,
-          description: data.user.blogs.description,
-          image: data.user.blogs.image,
+          title: data.blog.title,
+          description: data.blog.description,
+          image: data.blog.image,
         }
       }))
   }
 
-  async sendRequest() {
-    const res = await axios.put(`http://localhost:5000/api/blog/update/${this.props.blogID}`, {
+  async sendRequest(id) {
+    const res = await axios.put(`http://localhost:5000/api/blog/update/${id}`, {
       title: this.state.inputs.title,
-      description: this.state.inputs.description
+      description: this.state.inputs.description,
+      image: this.state.inputs.image
     })
       .catch(err => console.log(err))
 
@@ -69,20 +71,23 @@ export class BlogDetail extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // console.log(this.state.inputs);
-    console.log(this.state.blog);
-    this.sendRequest()
+    console.log(this.state.inputs);
+    // console.log(this.state.blog);
+    const idArr = document.URL.split('/');
+    let id = idArr[idArr.length - 1];
+    this.sendRequest(id)
       .then(data => console.log(data))
       .then(() => {
         window.location.replace("/myBlogs")
       })
+      .catch(() => console.log("Can not update"))
   }
 
 
   render() {
     return (
       <>
-        <header className="masthead" style={{ "backgroundImage": "url('assets/img/post-sample-image.jpg')" }}>
+        <header className="masthead" style={{ "backgroundImage": "url(" + this.state.inputs.image + ")" }}>
           <div className="container position-relative px-4 px-lg-5">
             <div className="row gx-4 gx-lg-5 justify-content-center">
               <div className="col-md-10 col-lg-8 col-xl-7">
