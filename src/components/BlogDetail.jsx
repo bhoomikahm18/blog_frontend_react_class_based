@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { Component } from 'react'
-// import { Link } from 'react-router-dom'
 
 export class BlogDetail extends Component {
   constructor(props) {
@@ -117,8 +116,8 @@ export class BlogDetail extends Component {
                     <label htmlFor="description">Description</label>
                   </div>
                   <div className="form-floating">
-                    <input className="form-control" id="image" name="image"
-                      placeholder="Add Image..." value={this.state.inputs.iamge} onChange={this.handleChange}></input>
+                    <textarea className="form-control" id="image" name="image"
+                      placeholder="Add Image..." value={this.state.inputs.image} onChange={this.handleChange}></textarea>
                     <label htmlFor="image">Image</label>
                   </div> <br />
 

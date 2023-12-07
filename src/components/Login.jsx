@@ -32,10 +32,10 @@ export class Login extends Component {
     }).catch(err => {
       if (err.response.request.status === 404) {
         alert("User does not exist");
-        this.setState(false);
+        this.props.setLoggedIn(false);
       } else if (err.response.request.status === 400) {
         alert("Invalid password");
-        this.setState(false);
+        this.props.setLoggedIn(false);
       }
     })
 
@@ -56,7 +56,9 @@ export class Login extends Component {
         console.log(data);
       })
       .then(data => {
-        this.props.setLoggedIn(true);
+        this.props.setLoggedIn(() => ({
+          isLoggedIn: true
+        }));
         window.location.replace("/myBlogs")
       })
       .catch(err => console.log("There is mistake in Login"))
