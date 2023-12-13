@@ -6,11 +6,11 @@ import { Route, Routes } from 'react-router-dom'
 import Login from './components/Login'
 import Logout from './components/Logout'
 import Signup from './components/Signup'
-import AddBlogs from './components/AddBlogs'
+import AddBlog from './components/AddBlog'
 import UserBlogs from './components/UserBlogs'
 import BlogDetail from './components/BlogDetail'
 import Blog from './components/Blog'
-
+//add JSX for everything
 export class App extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +35,7 @@ export class App extends Component {
 
           <Route path='/' element={<Home />} />
           <Route path='/blog/:id' element={<Blog />} />
-          <Route path='/blog/add' element={<AddBlogs isLoggedIn={this.state.isLoggedIn} />} />
+          <Route path='/blog/add' element={<AddBlog isLoggedIn={this.state.isLoggedIn} />} />
           <Route path='/myBlogs' element={<UserBlogs />} />
           <Route path='/editBlog/:id' element={<BlogDetail />} />
         </Routes>
