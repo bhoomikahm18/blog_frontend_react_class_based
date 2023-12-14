@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 export class Navbar extends Component {
 
     render() {
-        console.log("inside navbar : " + this.props.isLoggedIn);
         return (
             <>
                 <nav className="navbar navbar-expand-lg navbar-light" id="mainNav">

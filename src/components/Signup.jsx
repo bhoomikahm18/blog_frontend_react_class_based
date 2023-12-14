@@ -10,6 +10,11 @@ export class Signup extends Component {
         name: "",
         email: "",
         password: ""
+      },
+      error: {
+        errFlag: false,
+        errStatus: "",
+        errMsg: ""
       }
     }
 
@@ -21,6 +26,7 @@ export class Signup extends Component {
 
   handleChange(e) {
     this.setState((prevState) => ({
+      ...prevState,
       inputs: {
         ...prevState.inputs,
         [e.target.name]: e.target.value,
@@ -29,11 +35,24 @@ export class Signup extends Component {
   }
 
   async sendRequest() {
-    const res = await axios.post(`http://localhost:5000/api/user/signup`, {
-      name: this.state.inputs.name,
-      email: this.state.inputs.email,
-      password: this.state.inputs.password,
-    }).catch(err => console.log(err))
+    let res;
+    try {
+      res = await axios.post(`http://localhost:5000/api/user/signup`, {
+        name: this.state.inputs.name,
+        email: this.state.inputs.email,
+        password: this.state.inputs.password,
+      })
+    }
+    catch (err) {
+      this.setState(prevState => ({
+        ...prevState,
+        error: {
+          errFlag: true,
+          errStatus: err.response.request.status,
+          errMsg: err.response.data.message,
+        }
+      }));
+    }
 
     let data = null;
     if (res) {
@@ -45,14 +64,24 @@ export class Signup extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    console.log(this.state.inputs);
-    this.sendRequest()
-      .then(data => localStorage.setItem("userID", data.user._id))
-      .then(data => {
-        this.props.setLoggedIn(true);
-        window.location.replace("/myBlogs")
-      })
-      .catch(err => console.log("There is mistake in Sign up"))
+    try {
+      this.sendRequest()
+        .then(data => localStorage.setItem("userID", data.user._id))
+        .then(data => {
+          this.props.setLoggedIn(true);
+          window.location.replace("/myBlogs")
+        })
+    } catch (err) {
+      console.log(err);
+      this.setState(prevState => ({
+        ...prevState,
+        error: {
+          errFlag: true,
+          errStatus: err.response.request.status,
+          errMsg: err.response.data.message,
+        }
+      }));
+    }
   }
 
   render() {
@@ -80,7 +109,7 @@ export class Signup extends Component {
                   <form action="/auth/signup" method="POST" onSubmit={this.handleSubmit}>
                     <div className="form-floating">
                       <input className="form-control" id="name" name="name" type="text" onChange={this.handleChange} value={this.state.name}
-                        placeholder="Type your Name..." />
+                        placeholder="Type your Name..." required />
                       <label htmlFor="name">Name</label>
                     </div><br />
                     <div className="form-floating">
@@ -98,9 +127,12 @@ export class Signup extends Component {
                       <button className="btn text-uppercase" id="submitButton" type="submit" style={{ color: 'orange' }}>Sign Up</button>
                     </div>
 
-                    <span style={{ 'color': '#dc3545', 'fontWeight': 'bold', 'fontStyle': 'oblique' }}>
-                      &ensp; &ensp;
-                    </span>
+                    {
+                      (this.state.error.errFlag) &&
+                      <span style={{ 'color': '#dc3545', 'fontWeight': 'bold', 'fontStyle': 'oblique' }}>
+                        &ensp; &ensp; {this.state.error.errMsg} &ensp; &ensp; :  {this.state.error.errStatus}
+                      </span>
+                    }
                   </form>
                 </div>
               </div>
